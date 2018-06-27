@@ -67,7 +67,7 @@ cat > $RM <<EOF
 DNP=\$1
 docker rm -f DAppNodeCore-\${DNP}.dnp.dappnode.eth -t 0
 EOF
-chmod +x $UP
+chmod +x $RM
 
 #################
 # MODIFY bashrc #
