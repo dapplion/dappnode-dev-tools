@@ -62,12 +62,12 @@ docker-compose -f ${DAPPNODE_SRC}/docker-compose-\${DNP}.yml up -d
 EOF
 chmod +x $UP
 
-RM=/usr/bin/drm
-cat > $RM <<EOF
+INTO=/usr/bin/into
+cat > $INTO <<EOF
 DNP=\$1
-docker rm -f DAppNodeCore-\${DNP}.dnp.dappnode.eth
+docker exec -it DAppNodeCore-\${DNP}.dnp.dappnode.eth sh
 EOF
-chmod +x $RM
+chmod +x $INTO
 
 #################
 # MODIFY bashrc #
