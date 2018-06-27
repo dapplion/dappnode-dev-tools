@@ -55,17 +55,17 @@ docker-compose -f $WATCHDOG up -d
 # DC SCRIPTS #
 ##############
 
-UP=/usr/bin/up.sh
+UP=/usr/bin/up
 cat > $UP <<EOF
 DNP=\$1
 docker-compose -f ${DAPPNODE_SRC}/docker-compose-\${DNP}.yml up -d
 EOF
 chmod +x $UP
 
-RM=/usr/bin/rm.sh
+RM=/usr/bin/drm
 cat > $RM <<EOF
 DNP=\$1
-docker rm -f DAppNodeCore-\${DNP}.dnp.dappnode.eth -t 0
+docker rm -f DAppNodeCore-\${DNP}.dnp.dappnode.eth
 EOF
 chmod +x $RM
 
