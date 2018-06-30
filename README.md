@@ -7,3 +7,4 @@ wget -O - https://raw.githubusercontent.com/dapplion/dappnode-dev-tools/master/d
 ```
 
 fgd
+asdsad
