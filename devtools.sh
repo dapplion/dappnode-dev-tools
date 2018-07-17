@@ -69,6 +69,13 @@ docker exec -it DAppNodeCore-\${DNP}.dnp.dappnode.eth sh
 EOF
 chmod +x $INTO
 
+RESTORE=/usr/bin/restore
+cat > $RESTORE <<EOF
+sudo rm  /usr/src/dappnode/docker-compose*.yml 
+wget -O - https://github.com/dappnode/DAppNode/releases/download/v0.1.1/dappnode_install.sh | sudo bash
+EOF
+chmod +x $RESTORE
+
 #################
 # MODIFY bashrc #
 #################
