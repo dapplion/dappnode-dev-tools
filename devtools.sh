@@ -62,6 +62,7 @@ docker-compose -f ${DAPPNODE_SRC}/docker-compose-\${DNP}.yml up -d
 EOF
 chmod +x $UP
 
+
 INTO=/usr/bin/into
 cat > $INTO <<EOF
 DNP=\$1
@@ -69,12 +70,27 @@ docker exec -it DAppNodeCore-\${DNP}.dnp.dappnode.eth sh
 EOF
 chmod +x $INTO
 
+
 RESTORE=/usr/bin/restore
 cat > $RESTORE <<EOF
 sudo rm  /usr/src/dappnode/docker-compose*.yml 
 wget -O - https://github.com/dappnode/DAppNode/releases/download/v0.1.1/dappnode_install.sh | sudo bash
 EOF
 chmod +x $RESTORE
+
+
+2VER=/usr/bin/2ver
+cat > $2VER <<EOF
+REPO=$1 # lowercase, i.e. dappmanager
+BRANCH=${2:-dev}
+REPO_DIR="DNP_$(echo $REPO | awk '{print toupper($0)}')"
+sudo rm -rf $REPO_DIR
+sudo git clone https://github.com/dappnode/${REPO_DIR}.git -b $BRANCH
+cd $REPO_DIR
+docker-compose -f docker-compose-${REPO}.yml build
+up $REPO
+EOF
+chmod +x $2VER
 
 #################
 # MODIFY bashrc #
