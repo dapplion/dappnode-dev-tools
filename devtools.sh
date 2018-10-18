@@ -32,25 +32,6 @@ EOF
 
 docker-compose -f $PORTAINER up -d
 
-############
-# WATCHDOG #
-############
-
-WATCHDOG=${DAPPNODE_SRC}/docker-compose-watchdog.yml
-
-cat > $WATCHDOG <<EOF
-version: "3"
-services:
-  watchdog:
-    image: v2tec/watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30
-EOF
-
-docker-compose -f $WATCHDOG up -d
-
 ##############
 # DC SCRIPTS #
 ##############
