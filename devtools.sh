@@ -16,6 +16,15 @@ EOF
 chmod +x $UP
 
 
+LOG=/usr/bin/log
+cat > $LOG <<EOF
+#!/bin/bash
+DNP=\$1
+docker logs DAppNodeCore-\${DNP}.dnp.dappnode.eth -f
+EOF
+chmod +x $LOG
+
+
 INTO=/usr/bin/into
 cat > $INTO <<EOF
 #!/bin/bash
@@ -39,12 +48,12 @@ cat > $TO_VER <<EOF
 #!/bin/bash
 REPO=$1 # lowercase, i.e. dappmanager
 BRANCH=${2:-dev}
-REPO_DIR="DNP_$(echo $REPO | awk '{print toupper($0)}')"
-sudo rm -rf $REPO_DIR
-sudo git clone https://github.com/dappnode/${REPO_DIR}.git -b $BRANCH
-cd $REPO_DIR
-docker-compose -f docker-compose-${REPO}.yml build
-up $REPO
+REPO_DIR="${DAPPNODE_SRC}/DNP_\$(echo \$REPO | awk '{print toupper(\$0)}')"
+sudo rm -rf \$REPO_DIR
+sudo git clone https://github.com/dappnode/\${REPO_DIR}.git -b \$BRANCH ${DAPPNODE_SRC}
+cd \$REPO_DIR
+docker-compose -f \${REPO_DIR}/docker-compose*.yml build
+up \$REPO
 EOF
 chmod +x $TO_VER
 
