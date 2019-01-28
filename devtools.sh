@@ -56,11 +56,12 @@ rm -f $TO_VER
 cat > $TO_VER <<EOF
 #!/bin/bash
 REPO=\$1 # lowercase, i.e. dappmanager
+REPO_TAG="DNP_\$(echo \$REPO | awk '{print toupper(\$0)}')"
 BRANCH=\${2:-dev}
-REPO_DIR="${DAPPNODE_SRC}/DNP_\$(echo \$REPO | awk '{print toupper(\$0)}')"
+REPO_DIR="${DAPPNODE_SRC}/\${REPO_TAG}"
 sudo rm -rf \$REPO_DIR
 mkdir -p \$REPO_DIR
-sudo git clone https://github.com/dappnode/\${REPO_DIR}.git -b \$BRANCH \$REPO_DIR
+sudo git clone https://github.com/dappnode/\${REPO_TAG}.git -b \$BRANCH \$REPO_DIR
 cd \$REPO_DIR
 docker-compose -f \${REPO_DIR}/docker-compose*.yml build
 up \$REPO
