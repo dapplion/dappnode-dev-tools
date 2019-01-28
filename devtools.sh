@@ -8,6 +8,7 @@ cd $DAPPNODE_SRC
 ##############
 
 UP=/usr/bin/up
+rm -f $UP
 cat > $UP <<EOF
 #!/bin/bash
 DNP=\$1
@@ -18,6 +19,7 @@ echo "Added command 'up' to $UP"
 
 
 LOG=/usr/bin/log
+rm -f $LOG
 cat > $LOG <<EOF
 #!/bin/bash
 DNP=\$1
@@ -28,6 +30,7 @@ echo "Added command 'log' to $LOG"
 
 
 INTO=/usr/bin/into
+rm -f $INTO
 cat > $INTO <<EOF
 #!/bin/bash
 DNP=\$1
@@ -38,6 +41,7 @@ echo "Added command 'into' to $INTO"
 
 
 RESTORE=/usr/bin/restore
+rm -f $RESTORE
 cat > $RESTORE <<EOF
 #!/bin/bash
 sudo rm  /usr/src/dappnode/docker-compose*.yml 
@@ -48,6 +52,7 @@ echo "Added command 'restore' to $RESTORE"
 
 
 TO_VER=/usr/bin/toVer
+rm -f $TO_VER
 cat > $TO_VER <<EOF
 #!/bin/bash
 REPO=\$1 # lowercase, i.e. dappmanager
